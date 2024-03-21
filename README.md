@@ -29,3 +29,11 @@ Se valorara:
 Nice to Do:
 Usar una arquitectura de DDD.
 ```
+
+# Diseño
+
+Se trata de dar solución al problema con un enfoque de "design-first". El problema comprende la creación de un conjunto de datos por medio de una API Rest (microservicio). Para el diseño de la solución se comienza definiendo las entidades del negocio (dominio), encontrándose: Agricultor, Cliente, Campos, Cosecha, Fruta y Variedades:
+
+![Diagrama de componentes](docs/images/challenge-component.png)
+
+En el esquema arriba, se agrupan las entidades de negocio según su funcionalidad. En Agricultura se establece el proceso agricola, desde la siembra hasta la cosecha. En Cliente se referencia a la comercialización de los productos agrícolas y, finalmente, en Cultivo se relaciona específicamente con los productos agrícolas que se involucran en el proceso agrícola. El fin de estas agrupaciones de negocio es comprender de mejor manera los casos de uso que se requieren implementar.
