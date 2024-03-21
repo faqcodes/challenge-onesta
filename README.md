@@ -65,5 +65,31 @@ Se ha generado un archivo .yml con la documentación inicial de la API considera
 
 ![Swagger](docs/images/challenge-swagger.png)
 
+# Implementación
 
+## Estructura de carpetas
+
+Para la estructura de carpeta se utiliza arquitectura hexagonal + vertical slicing, quedando de la siguiente manera (ejemplo):
+
+- src /
+    fruits /
+      application /
+      domain /
+      infrastructure/
+    farmers /
+      application /
+      domain /
+      infrastruture /
+...
+
+## Librerías
+
+Para la creación del proyecto se utilizará principalmente:
+
+express
+tsyringe
+zod
+sqlite3
+typeorm
+jest
 
