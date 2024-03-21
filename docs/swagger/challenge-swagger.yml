@@ -1,0 +1,308 @@
+openapi: '3.0.2'
+info:
+  title: Onesta Challenge API
+  version: '1.0.0'
+  description: >
+    El servicio Onesta Challenge API expone las operaciones necesarias para el registro de agricultores y sus campos, clientes, cosechas, frutas y variedades
+servers:
+  - url: 'http://localhost:8080/api'
+    description: Local Development Environment
+paths:
+  /fruits:
+    post:
+      requestBody:
+        description: Objeto con datos para el registro de una fruta y sus variedades. Todos los campos son obligatorios
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FruitRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FruitResponse'
+          description: La fruta y su variedad se ha agregado satisfactoriamente
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FruitError400'
+          description: Error al agregar la fruta y su variedad
+  /harvests:
+    post:
+      requestBody:
+        description: Objeto con datos para el registro de un cosecha. Todos los campos son obligatorios
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HarvestRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarvestResponse'
+          description: La cosecha se ha agregado satisfactoriamente
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarvestError400'
+          description: Error al agregar la cosecha
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarvestError404'
+          description: Error al agregar la cosecha. Una de las referencias requeridas no fue encontrada
+  /farmers:
+    post:
+      requestBody:
+        description: Objeto con datos para el registro de un agricultor y sus campos. Todos los campos son obligatorios
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FarmerRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmerResponse'
+          description: El agricultor y sus campos se han agregado satisfactoriamente
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FarmerError400'
+          description: Error al agregar al agricultor y sus campos
+  /clients:
+    post:
+      requestBody:
+        description: Objeto con datos para el registro de un cliente. Todos los campos son obligatorios
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+          description: El cliente se ha agregado satisfactoriamente
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError400'
+          description: Error al agregar al cliente
+components:
+  schemas:
+    FruitRequest:
+      type: object
+      properties:
+        fruit:
+          required:
+            - 'El nombre de la fruta es un campo requerido'
+          type: string
+          description: Nombre de la fruta
+          example: Orange
+        variety:
+          required:
+            - 'La variedad de la fruta es un campo requerido'
+          type: string
+          description: Variedad de la fruta cuyos valores solo pueden ser = Small | Medium | Large | Extra Large
+          example: Small
+    FruitResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código de respuesta
+          example: SUCCESS
+        message:
+          type: string
+          example: La fruta y su variedad se ha agregado satisfactoriamente
+    FruitError400:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código del respuesta
+          example: ERROR
+        message:
+          type: string
+          description: Descripción del error
+          example: Error al agregar la fruta y su variedad
+
+    HarvestRequest:
+      type: object
+      properties:
+        field_id:
+          required:
+            - 'El ID del campo es requerido'
+          type: integer
+          description: ID del campo correspondiente a la cosecha
+          example: 1
+        email:
+          required:
+            - 'El correo electrónico del cliente es requerido'
+          type: string
+          description: Correo electrónico del cliente
+          example: alvaro@onesta.com
+        fruit:
+          required:
+            - 'El nombre de la fruta es requerido'
+          type: string
+          description: Nombre de la fruta
+          example: Orange
+        variety:
+          required:
+            - 'La variedad de la fruta es requerida'
+          type: string
+          description: Variedad de la fruta cuyos valores solo pueden ser = Small | Medium | Large | Extra Large
+          example: Medium
+    HarvestResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código de respuesta
+          example: SUCCESS
+        message:
+          type: string
+          example: La cosecha se ha agregado satisfactoriamente
+    HarvestError400:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código del respuesta
+          example: ERROR
+        message:
+          type: string
+          description: Descripción del error
+          example: Error al agregar la cosecha
+    HarvestError404:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código del respuesta
+          example: ERROR
+        message:
+          type: string
+          description: Descripción del error
+          example: Error al agregar la cosecha. Una de las referencias requeridas no fue encontrada
+
+    FarmerRequest:
+      type: object
+      properties:
+        email:
+          required:
+            - 'El correo electrónico es un campo requerido'
+          type: string
+          description: Correo electrónico del agricultor
+          example: juan@rodriguez.org
+        first_name:
+          required:
+            - 'El nombre del agricultor es un campo requerido'
+          type: string
+          description: Nombre del agricultor
+          example: Juan
+        last_name:
+          required:
+            - 'El apellido del agricultor es un campo requerido'
+          type: string
+          description: Apellido del agricultor
+          example: Rodriguez
+        fields:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/FieldModel'
+    FarmerResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código de respuesta
+          example: SUCCESS
+        message:
+          type: string
+          example: El agricultor y sus campos se han agregado satisfactoriamente
+    FarmerError400:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código del respuesta
+          example: ERROR
+        message:
+          type: string
+          description: Descripción del error
+          example: Error al agregar al agricultor y sus campos
+    FieldModel:
+      type: object
+      properties:
+        name:
+          required:
+            - 'El nombre de campo es requerido'
+          type: string
+          description: Nombre del Campo
+          example: Recusandae
+        location:
+          required:
+            - 'La ubicación del campo es requerido'
+          type: string
+          description: Ubicación del campo
+          example: 675 Alanna Ports
+
+    ClientRequest:
+      type: object
+      properties:
+        email:
+          required:
+            - 'El correo electrónico es un campo requerido'
+          type: string
+          description: Correo electrónico del cliente
+          example: juan@rodriguez.org
+        first_name:
+          required:
+            - 'El nombre del cliente es un campo requerido'
+          type: string
+          description: Nombre del cliente
+          example: Alejandra
+        last_name:
+          required:
+            - 'El apellido del cliente es un campo requerido'
+          type: string
+          description: Apellido del cliente
+          example: Valdivia
+    ClientResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código de respuesta
+          example: SUCCESS
+        message:
+          type: string
+          example: El cliente se ha agregado satisfactoriamente
+    ClientError400:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código del respuesta
+          example: ERROR
+        message:
+          type: string
+          description: Descripción del error
+          example: Error al agregar el cliente

@@ -61,6 +61,9 @@ A continuación, se presenta el diagrama de secuencia del caso de uso *Agriculto
 
 ## OPEN API (Swagger)
 
+Se ha generado un archivo .yml con la documentación inicial de la API considerando el análisis que se ha realizado hasta ahora. El archivo se encuentra [AQUI](docs/swagger/challenge-swagger.yml)
+
+![Swagger](docs/images/challenge-swagger.png)
 
 
 
