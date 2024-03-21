@@ -48,3 +48,19 @@ Supuestos:
 1 Campo solo puede tener 1 Cosecha
 
 La aplicación se diseñará considerando una arquitectura limpia (hexagonal), aplicando los principios SOLID y, si es necesario, aplicar patrones de diseño.
+
+## Casos de uso
+
+Según el enunciado se tienen 4 casos de uso a implementar más 1 caso de uso "principal" para permitir la carga de datos masivos (archivo .csv) y que utilizará los 4 casos de uso anteriores para su funcionamiento. Si bien, se implementarán todos los casos de uso, solo se diseñará y documentará como ejemplo el caso de uso: *Agricultores y sus distintos Campos*; para la implementación de los otros casos de usos se seguirá el mismo patrón
+
+## Diagrama de secuencia
+
+A continuación, se presenta el diagrama de secuencia del caso de uso *Agricultores y sus distintos Campos*. En el diagrama se puede apreciar (de forma simplificada) las interacciones entre las capas de la arquitectura limpia, así como las reglas de aplicación y negocio:
+
+![Diagrama de secuencia](docs/images/challenge-sequence-diagram.png)
+
+## OPEN API (Swagger)
+
+
+
+
