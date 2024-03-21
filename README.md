@@ -37,3 +37,14 @@ Se trata de dar solución al problema con un enfoque de "design-first". El probl
 ![Diagrama de componentes](docs/images/challenge-component.png)
 
 En el esquema arriba, se agrupan las entidades de negocio según su funcionalidad. En Agricultura se establece el proceso agricola, desde la siembra hasta la cosecha. En Cliente se referencia a la comercialización de los productos agrícolas y, finalmente, en Cultivo se relaciona específicamente con los productos agrícolas que se involucran en el proceso agrícola. El fin de estas agrupaciones de negocio es comprender de mejor manera los casos de uso que se requieren implementar.
+
+Según el enunciado y el archivo .csv entregado, se pueden establecer algunos atributos iniciales y las relaciones que pueden tener las entidad de negocio. A continuación, se presenta el esquema inicial de entidad-relación, con dichos atributos y que será implementado posteriormente en SQLite:
+
+![Diagrama entidad relación](docs/images/challenge-entity-relation.png)
+
+En el esquema anterior, se simplificará en la implementación la entidad Variedades, dejando fijo los valores: SMALL, MEDIUM, LARGE y EXTRA LARGE dentro de la aplicación para la asignación a la entidad Fruta.
+
+Supuestos:
+1 Campo solo puede tener 1 Cosecha
+
+La aplicación se diseñará considerando una arquitectura limpia (hexagonal), aplicando los principios SOLID y, si es necesario, aplicar patrones de diseño.
