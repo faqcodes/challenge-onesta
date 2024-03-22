@@ -1,7 +1,7 @@
 import { Entity, PrimaryColumn } from 'typeorm';
 
-@Entity()
-export class Fruit {
+@Entity('Fruit')
+export class FruitEntity {
   @PrimaryColumn()
   fruit!: string;
 

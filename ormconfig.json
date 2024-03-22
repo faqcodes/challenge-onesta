@@ -1,10 +1,12 @@
 {
   "type": "sqlite",
   "database": "./data/database.sqlite",
+  "name": "default",
   "synchronize": true,
   "logging": true,
   "entities": [
-    "dist/entities/**/*.js"
+    "src/fruits/infrastructure/repositories/**/*.ts",
+    "dist/fruits/infrastructure/repositories/**/*.js"
   ],
   "migrations": [
     "dist/migrations/**/*.js"

@@ -1,5 +1,5 @@
-import { Fruit } from './fruit.entity';
+import { Fruit } from './fruit';
 
 export interface FruitRepository {
-  save(fruit: Fruit): Promise<void>;
+  save(fruit: Fruit): Promise<Fruit>;
 }

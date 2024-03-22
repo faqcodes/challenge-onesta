@@ -1,9 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import { ErrorItem } from '../../shared/models/error-item.model';
 import { Result } from '../../shared/models/result.model';
-import { Fruit } from '../domain/fruit.entity';
+import { Fruit } from '../domain/fruit';
 import { FruitRepository } from '../domain/fruit.repository';
-import { Variety } from '../domain/variety.entity';
 
 @injectable()
 export class CreateFruitUseCase {
@@ -14,8 +13,7 @@ export class CreateFruitUseCase {
 
   async execute(fruit: string, variety: string): Promise<Result<Fruit>> {
     try {
-      const varietyEntity: Variety = Variety[variety as keyof typeof Variety];
-      const fruitEntity: Fruit = new Fruit(fruit, varietyEntity);
+      const fruitEntity: Fruit = new Fruit(fruit, variety);
 
       await this.fruitRepository.save(fruitEntity);
 

@@ -3,7 +3,7 @@ import { injectable } from 'tsyringe';
 import { AppResponse } from '../../../shared/models/app-response.model';
 import { ErrorItem } from '../../../shared/models/error-item.model';
 import { CreateFruitUseCase } from '../../application/fruit.usecase';
-import { Fruit } from '../../domain/fruit.entity';
+import { Fruit } from '../../domain/fruit';
 import { fruitSchema } from './fruit.schema';
 
 @injectable()

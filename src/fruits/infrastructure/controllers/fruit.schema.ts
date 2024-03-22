@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Variety } from '../../domain/variety.entity';
+import { Variety } from '../../domain/variety';
 
 const varietyEnum = z.nativeEnum(Variety);
 type varietyEnum = z.infer<typeof varietyEnum>;

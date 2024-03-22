@@ -1,10 +1,23 @@
 import { injectable } from 'tsyringe';
-import { Fruit } from '../../domain/fruit.entity';
+import { getRepository } from 'typeorm';
+import { Fruit } from '../../domain/fruit';
 import { FruitRepository } from '../../domain/fruit.repository';
+import { FruitEntity } from './fruit.entity';
 
 @injectable()
 export class SQLiteFruitRepository implements FruitRepository {
-  save(fruit: Fruit): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  async save(fruit: Fruit): Promise<Fruit> {
+    // Map to data entity
+    const fruitEntity: FruitEntity = {
+      fruit: fruit.fruit,
+      variety: fruit.variety
+    };
+    const fruitRepository = getRepository(FruitEntity);
+    const result = await fruitRepository.save(fruitEntity);
+
+    // TODO: Map to business entity
+
+    return fruit;
   }
 }
