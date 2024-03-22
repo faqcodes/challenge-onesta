@@ -13,6 +13,12 @@ export class CreateFruitUseCase {
 
   async execute(fruit: string, variety: string): Promise<Result<Fruit>> {
     try {
+      const fruitData = await this.fruitRepository.findOneBy(fruit, variety);
+      if (fruitData) {
+        // Do nothing: the save method in repository update the record
+        console.log('Fruit Exists:', fruitData);
+      }
+
       const fruitEntity: Fruit = new Fruit(fruit, variety);
 
       await this.fruitRepository.save(fruitEntity);

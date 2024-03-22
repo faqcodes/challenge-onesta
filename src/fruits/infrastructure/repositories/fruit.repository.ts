@@ -20,4 +20,18 @@ export class SQLiteFruitRepository implements FruitRepository {
 
     return fruit;
   }
+
+  async findOneBy(fruit: string, variety: string): Promise<Fruit | null> {
+    const fruitRepository = getRepository(FruitEntity);
+    const result = await fruitRepository.findOneBy({ fruit, variety });
+
+    if (result) {
+      return {
+        fruit: result.fruit,
+        variety: result.variety
+      }
+    }
+
+    return null;
+  }
 }
