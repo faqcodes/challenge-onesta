@@ -1,8 +1,9 @@
 import bodyParser from 'body-parser';
 import express, { Application, Request, Response } from 'express';
-import 'reflect-metadata'; // Importante para el uso de decoradores en Tsyringe
+import 'reflect-metadata';
 import { container } from './config/container.config';
 import { FruitController } from './fruits/infrastructure/controllers/fruit.controller';
+import { AppResponse } from './shared/models/app-response.model';
 
 const app: Application = express();
 const port = 3000;
@@ -17,9 +18,16 @@ app.post('/api/fruits', (req: Request, res: Response) => fruitController.create(
 
 app.use((err: Error, req: Request, res: Response, next: Function) => {
   console.error(err.stack);
-  res.status(500).send('Something broke!');
+  const error: AppResponse<void> = {
+    code: 'ERROR',
+    message: 'Ha ocurrido un error no controlado en la aplicación!',
+    errors: [{
+      message: err.stack || ''
+    }]
+  }
+  res.status(500).send(error);
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Onesta Challenge API is running on port: ${port}`);
 });
