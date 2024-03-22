@@ -45,5 +45,6 @@ yarn.lock
 .gitattributes
 
 # app
-.editorconfig
 data/**/*
+.editorconfig
+

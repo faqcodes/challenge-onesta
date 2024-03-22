@@ -71,6 +71,7 @@ Se ha generado un archivo .yml con la documentación inicial de la API considera
 
 Para la estructura de carpeta se utiliza arquitectura hexagonal + vertical slicing, quedando de la siguiente manera (ejemplo):
 
+```
 - src /
     fruits /
       application /
@@ -81,19 +82,25 @@ Para la estructura de carpeta se utiliza arquitectura hexagonal + vertical slici
       domain /
       infrastruture /
 ...
+```
 
 ## Librerías
 
 Para la creación del proyecto se utilizará principalmente:
 
+```
 express
 tsyringe
-zod
-sqlite3
 typeorm
+sqlite3
+zod
 jest
+```
 
 ## Docker
 
+```
 docker build -t challenge-onesta .
 docker run -p 3000:3000 challenge-onesta
+```
+
