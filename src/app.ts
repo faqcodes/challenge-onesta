@@ -21,7 +21,7 @@ app.use((err: Error, req: Request, res: Response, next: Function) => {
   const error: AppResponse<void> = {
     code: 'ERROR',
     message: 'Ha ocurrido un error no controlado en la aplicación!',
-    errors: [{
+    details: [{
       message: err.stack || ''
     }]
   }

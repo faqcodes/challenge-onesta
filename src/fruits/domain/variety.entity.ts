@@ -1,6 +1,6 @@
 export enum Variety {
-  Small,
-  Medium,
-  Large,
-  ExtraLarge
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
+  ExtraLarge = 'extra large'
 }
