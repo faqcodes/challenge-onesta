@@ -1,6 +1,8 @@
 
 import 'reflect-metadata';
 import { container } from 'tsyringe';
+import { CreateClientUseCase } from '../clients/application/client.usecase';
+import { SQLiteClientRepository } from '../clients/infrastructure/repositories/client.repository';
 import { CreateFarmerUseCase } from '../farmers/application/farmer.usecase';
 import { SQLiteFarmerRepository } from '../farmers/infrastructure/repositories/fruit.repository';
 import { CreateFruitUseCase } from '../fruits/application/fruit.usecase';
@@ -11,6 +13,9 @@ container.register('FruitRepository', { useClass: SQLiteFruitRepository });
 
 container.register('FarmerUseCase', { useClass: CreateFarmerUseCase });
 container.register('FarmerRepository', { useClass: SQLiteFarmerRepository });
+
+container.register('ClientUseCase', { useClass: CreateClientUseCase });
+container.register('ClientRepository', { useClass: SQLiteClientRepository });
 
 export { container };
 

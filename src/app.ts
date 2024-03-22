@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import bodyParser from 'body-parser';
 import express, { Application, Request, Response } from 'express';
+import { ClientController } from './clients/infrastructure/controllers/client.controller';
 import { container } from './config/container.config';
 import { AppDataSource } from './data-source';
 import { FarmerController } from './farmers/infrastructure/controllers/famer.controller';
@@ -21,10 +22,12 @@ AppDataSource.initialize()
     // Controllers
     const fruitController = container.resolve(FruitController);
     const farmerController = container.resolve(FarmerController);
+    const clientController = container.resolve(ClientController);
 
     // Routes
     app.post('/api/fruits', (req: Request, res: Response) => fruitController.create(req, res));
     app.post('/api/farmers', (req: Request, res: Response) => farmerController.create(req, res));
+    app.post('/api/clients', (req: Request, res: Response) => clientController.create(req, res));
 
     // Generel errors
     app.use((err: Error, req: Request, res: Response, next: Function) => {
@@ -42,4 +45,5 @@ AppDataSource.initialize()
     app.listen(port, () => {
       console.log(`Onesta Challenge API is running on port: ${port}`);
     });
+
   }).catch((error: any) => console.log("TypeORM connection error: ", error));
