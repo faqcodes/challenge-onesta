@@ -93,3 +93,7 @@ sqlite3
 typeorm
 jest
 
+## Docker
+
+docker build -t challenge-onesta .
+docker run -p 3000:3000 challenge-onesta

@@ -43,4 +43,7 @@ dist/**/*
 yarn.lock
 .yarn
 .gitattributes
+
+# app
 .editorconfig
+data/**/*

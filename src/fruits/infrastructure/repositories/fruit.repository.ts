@@ -1,5 +1,5 @@
 import { injectable } from 'tsyringe';
-import { getRepository } from 'typeorm';
+import { AppDataSource } from '../../../data-source';
 import { Fruit } from '../../domain/fruit';
 import { FruitRepository } from '../../domain/fruit.repository';
 import { FruitEntity } from './fruit.entity';
@@ -13,7 +13,8 @@ export class SQLiteFruitRepository implements FruitRepository {
       fruit: fruit.fruit,
       variety: fruit.variety
     };
-    const fruitRepository = getRepository(FruitEntity);
+
+    const fruitRepository = AppDataSource.getRepository(FruitEntity);
     const result = await fruitRepository.save(fruitEntity);
 
     // TODO: Map to business entity
@@ -22,7 +23,7 @@ export class SQLiteFruitRepository implements FruitRepository {
   }
 
   async findOneBy(fruit: string, variety: string): Promise<Fruit | null> {
-    const fruitRepository = getRepository(FruitEntity);
+    const fruitRepository = AppDataSource.getRepository(FruitEntity);
     const result = await fruitRepository.findOneBy({ fruit, variety });
 
     if (result) {

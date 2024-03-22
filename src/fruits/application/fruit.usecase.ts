@@ -13,6 +13,7 @@ export class CreateFruitUseCase {
 
   async execute(fruit: string, variety: string): Promise<Result<Fruit>> {
     try {
+      // Application rule: si el registro ya existe, no insertar
       const fruitData = await this.fruitRepository.findOneBy(fruit, variety);
       if (fruitData) {
         // Do nothing: the save method in repository update the record

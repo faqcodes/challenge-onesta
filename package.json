@@ -1,8 +1,7 @@
 {
   "name": "challenge-onesta",
-  "packageManager": "yarn@4.1.1",
   "scripts": {
-    "start": "tsc && node ./dist/app.js",
+    "start": "tsc &&  NODE_ENV=production node ./dist/app.js",
     "build": "tsc",
     "dev": "nodemon --watch \"*.ts\" --exec \"ts-node\" ./src/app.ts"
   },
