@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { FieldEntity } from './field.entity';
 
 @Entity('Farmer')
 export class FarmerEntity {
@@ -10,4 +11,7 @@ export class FarmerEntity {
 
   @Column()
   last_name!: string;
+
+  @OneToMany(() => FieldEntity, (field) => field.farmer)
+  fields?: FieldEntity[]
 }

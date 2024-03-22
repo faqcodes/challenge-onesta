@@ -3,6 +3,7 @@ import { ErrorItem } from '../../shared/models/error-item.model';
 import { Result } from '../../shared/models/result.model';
 import { Farmer } from '../domain/farmer';
 import { FarmerRepository } from '../domain/farmer.repository';
+import { Field } from '../domain/field';
 
 @injectable()
 export class CreateFarmerUseCase {
@@ -11,7 +12,7 @@ export class CreateFarmerUseCase {
     private readonly farmerRepository: FarmerRepository
   ) { }
 
-  async execute(email: string, first_name: string, last_name: string): Promise<Result<Farmer>> {
+  async execute(email: string, first_name: string, last_name: string, fields: Field[]): Promise<Result<Farmer>> {
     try {
       // Application rule: si el registro ya existe, no insertar
       const farmerData = await this.farmerRepository.findOneBy(email);
@@ -20,7 +21,7 @@ export class CreateFarmerUseCase {
         console.log('Farmer Exists:', farmerData);
       }
 
-      const farmerEntity: Farmer = new Farmer(email, first_name, last_name);
+      const farmerEntity: Farmer = new Farmer(email, first_name, last_name, fields);
 
       await this.farmerRepository.save(farmerEntity);
 

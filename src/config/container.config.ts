@@ -4,7 +4,7 @@ import { container } from 'tsyringe';
 import { CreateClientUseCase } from '../clients/application/client.usecase';
 import { SQLiteClientRepository } from '../clients/infrastructure/repositories/client.repository';
 import { CreateFarmerUseCase } from '../farmers/application/farmer.usecase';
-import { SQLiteFarmerRepository } from '../farmers/infrastructure/repositories/fruit.repository';
+import { SQLiteFarmerRepository } from '../farmers/infrastructure/repositories/farmer.repository';
 import { CreateFruitUseCase } from '../fruits/application/fruit.usecase';
 import { SQLiteFruitRepository } from '../fruits/infrastructure/repositories/fruit.repository';
 

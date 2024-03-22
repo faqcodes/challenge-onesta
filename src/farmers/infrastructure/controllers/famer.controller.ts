@@ -4,6 +4,7 @@ import { AppResponse } from '../../../shared/models/app-response.model';
 import { ErrorItem } from '../../../shared/models/error-item.model';
 import { CreateFarmerUseCase } from '../../application/farmer.usecase';
 import { Farmer } from '../../domain/farmer';
+import { Field } from '../../domain/field';
 import { farmerSchema } from './farmer.schema';
 
 @injectable()
@@ -29,14 +30,14 @@ export class FarmerController {
       return;
     }
 
-    const { email, first_name, last_name } = validationResult.data;
+    const { email, first_name, last_name, fields } = validationResult.data;
 
-    const result = await this.createFarmerUseCase.execute(email, first_name, last_name);
+    const result = await this.createFarmerUseCase.execute(email, first_name, last_name, fields as Field[]);
 
     if (result.isFailure()) {
       const errorResponse: AppResponse<Farmer> = {
         code: 'ERROR',
-        message: `Error al crear el Agricultor`,
+        message: `Error al crear el Agricultor. Revise los detalles para más informacón`,
         details: result.getErrors()
       };
 
