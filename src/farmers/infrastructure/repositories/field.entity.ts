@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { FarmerEntity } from './farmer.entity';
 
 @Entity('Field')
@@ -16,5 +16,8 @@ export class FieldEntity {
   location!: string;
 
   @ManyToOne(() => FarmerEntity, (farmer) => farmer.fields)
+  @JoinColumn([
+    { name: 'email', referencedColumnName: 'email' }
+  ])
   farmer!: FarmerEntity;
 }

@@ -104,3 +104,9 @@ docker build -t challenge-onesta .
 docker run -p 3000:3000 challenge-onesta
 ```
 
+```
+curl -X POST \
+  -H "Content-Type: multipart/form-data" \
+  -F "cosechas=@/Users/felipe.quiroz/cosechas.csv" \
+  "http://localhost:3000/api/bulk-upload"
+```

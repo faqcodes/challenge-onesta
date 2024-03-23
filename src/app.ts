@@ -10,10 +10,14 @@ import { FruitController } from './fruits/infrastructure/controllers/fruit.contr
 import { HarvestController } from './harvests/infrastructure/controllers/harvest.controller';
 import { AppResponse } from './shared/models/app-response.model';
 
+import multer from 'multer'; // Middleware para gestionar la subida de archivos
+import { UploadController } from './upload/infrastructure/controllers/upload.controller';
+
 AppDataSource.initialize()
   .then(() => {
 
     const app: Application = express();
+    const upload = multer();
     const port = 3000;
 
     // Middleware para parsear el body de las solicitudes
@@ -25,12 +29,15 @@ AppDataSource.initialize()
     const farmerController = container.resolve(FarmerController);
     const clientController = container.resolve(ClientController);
     const harvestController = container.resolve(HarvestController);
+    const uploadController = container.resolve(UploadController);
 
     // Routes
     app.post('/api/fruits', (req: Request, res: Response) => fruitController.create(req, res));
     app.post('/api/farmers', (req: Request, res: Response) => farmerController.create(req, res));
     app.post('/api/clients', (req: Request, res: Response) => clientController.create(req, res));
     app.post('/api/harvests', (req: Request, res: Response) => harvestController.create(req, res));
+
+    app.post('/api/bulk-upload', upload.single('cosechas'), (req: Request, res: Response) => uploadController.upload(req, res));
 
     // Generel errors
     app.use((err: Error, req: Request, res: Response, next: Function) => {
